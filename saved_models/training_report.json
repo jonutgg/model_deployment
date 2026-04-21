@@ -1,0 +1,20 @@
+{
+  "trained_at_utc": "20260421_221039",
+  "placement": {
+    "model": "logistic_regression",
+    "metrics": {
+      "score": 0.8794905152271196,
+      "f1_weighted": 0.8794905152271196,
+      "accuracy": 0.89
+    }
+  },
+  "salary": {
+    "model": "ridge_regression",
+    "metrics": {
+      "score": 0.5774066754475735,
+      "r2": 0.5774066754475735,
+      "mae": 2.9291560936951018
+    }
+  },
+  "num_features": 36
+}

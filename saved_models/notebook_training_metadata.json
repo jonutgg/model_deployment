@@ -1,0 +1,59 @@
+{
+  "best_classification_model": "logistic",
+  "best_regression_model": "ridge",
+  "classification_results": [
+    {
+      "model": "logistic",
+      "f1_weighted": 0.8823554216141279,
+      "accuracy": 0.891
+    },
+    {
+      "model": "extra_trees",
+      "f1_weighted": 0.8661559906905597,
+      "accuracy": 0.885
+    }
+  ],
+  "regression_results": [
+    {
+      "model": "ridge",
+      "r2": 0.5972640809216943,
+      "mae": 2.850086559588807
+    },
+    {
+      "model": "hist_gbr",
+      "r2": 0.5806486343597956,
+      "mae": 2.6767007821854536
+    }
+  ],
+  "feature_columns": [
+    "gender",
+    "branch",
+    "cgpa",
+    "tenth_percentage",
+    "twelfth_percentage",
+    "backlogs",
+    "study_hours_per_day",
+    "attendance_percentage",
+    "projects_completed",
+    "internships_completed",
+    "coding_skill_rating",
+    "communication_skill_rating",
+    "aptitude_skill_rating",
+    "hackathons_participated",
+    "certifications_count",
+    "sleep_hours",
+    "stress_level",
+    "part_time_job",
+    "family_income_level",
+    "city_tier",
+    "internet_access",
+    "extracurricular_involvement",
+    "skill_stack",
+    "project_depth",
+    "academic_track",
+    "stability_ratio",
+    "engagement_signal",
+    "career_drive"
+  ],
+  "generated_at": "2026-04-21T21:29:25.893198+00:00"
+}
