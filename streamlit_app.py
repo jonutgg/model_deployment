@@ -12,14 +12,33 @@ from preprocessing_utils import REQUIRED_COLUMNS, load_bundle, prepare_inference
 
 
 MODEL_DIR = Path("saved_models")
-PLACEMENT_PATH = MODEL_DIR / "placement_model.joblib"
-SALARY_PATH = MODEL_DIR / "salary_model.joblib"
 
 
-@st.cache_resource(show_spinner=False)
+def _pick_latest(paths: list[Path]) -> Path | None:
+    existing = [path for path in paths if path.exists()]
+    if not existing:
+        return None
+    return max(existing, key=lambda path: path.stat().st_mtime)
+
+
 def load_models() -> tuple[dict | None, dict | None]:
-    placement = load_bundle(PLACEMENT_PATH) if PLACEMENT_PATH.exists() else None
-    salary = load_bundle(SALARY_PATH) if SALARY_PATH.exists() else None
+    placement_path = _pick_latest(
+        [
+            MODEL_DIR / "placement_model.pkl",
+            MODEL_DIR / "placement_model.joblib",
+            MODEL_DIR / "best_placement_model.pkl",
+        ]
+    )
+    salary_path = _pick_latest(
+        [
+            MODEL_DIR / "salary_model.pkl",
+            MODEL_DIR / "salary_model.joblib",
+            MODEL_DIR / "best_salary_model.pkl",
+        ]
+    )
+
+    placement = load_bundle(placement_path) if placement_path else None
+    salary = load_bundle(salary_path) if salary_path else None
     return placement, salary
 
 
@@ -118,6 +137,11 @@ def predict_local(row_dict: dict, placement_bundle: dict | None, salary_bundle: 
 def main() -> None:
     st.set_page_config(page_title="Student Outcome Lab", layout="wide")
     ui_header()
+
+    if st.button("Refresh model files", use_container_width=True):
+        st.cache_data.clear()
+        st.cache_resource.clear()
+        st.rerun()
 
     placement_bundle, salary_bundle = load_models()
     if not placement_bundle and not salary_bundle:
